@@ -3,7 +3,7 @@
 ```
  npx create-react-app shopito
 ```
-2.  (yaha se start kal)  for installing material UI for styles.
+2.    for installing material UI library for styles.
 ```
 npm install @mui/material @emotion/react @emotion/styled
 ```
