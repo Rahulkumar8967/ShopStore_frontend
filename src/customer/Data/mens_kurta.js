@@ -5,9 +5,9 @@ export const mens_kurta = [
     brand: "Majestic Man",
     title: "Men Printed Pure Cotton Straight Kurta",
     color: "Green",
-    discountedPrice: 499,
-    price: 1499,
-    discountPersent: 66,
+    discountedPrice: "₹499",
+    price: "₹1499",
+    discountPersent: "66% off",
     size: [
       {
         name: "S",
@@ -35,9 +35,9 @@ export const mens_kurta = [
     brand: "SG LEMAN",
     title: "Men Embroidered Jacquard Straight Kurta",
     color: "Yellow",
-    discountedPrice: 799,
-    price: 2499,
-    discountPersent: 68,
+    discountedPrice: "₹799",
+    price: "₹2499",
+    discountPersent: "68% off",
     size: [
       {
         name: "S",
@@ -65,9 +65,9 @@ export const mens_kurta = [
     brand: "FUBAR",
     title: "Men Printed Cotton Blend Straight Kurta",
     color: "Blue",
-    discountedPrice: 399,
-    price: 1499,
-    discountPersent: 73,
+    discountedPrice: "₹399",
+    price: "₹1499",
+    discountPersent: "73% off",
     size: [
       {
         name: "S",
@@ -95,9 +95,9 @@ export const mens_kurta = [
     brand: "ALY JOHN",
     title: "Men Solid Pure Cotton Straight Kurta",
     color: "White",
-    discountedPrice: 474,
-    price: 1999,
-    discountPersent: 76,
+    discountedPrice: "₹474",
+    price: "₹1999",
+    discountPersent: "76% off",
     size: [
       {
         name: "S",
@@ -125,9 +125,9 @@ export const mens_kurta = [
     brand: "PETER ENGLAND",
     title: "Men Woven Design Pure Cotton Straight Kurta",
     color: "Grey",
-    discountedPrice: 524,
-    price: 1049,
-    discountPersent: 50,
+    discountedPrice: "₹524",
+    price: "₹1049",
+    discountPersent: "50% off",
     size: [
       {
         name: "S",
@@ -155,9 +155,9 @@ export const mens_kurta = [
     brand: "Majestic Man",
     title: "Men Solid Pure Cotton Straight Kurta",
     color: "Pink",
-    discountedPrice: 499,
-    price: 1499,
-    discountPersent: 66,
+    discountedPrice: "₹499",
+    price: "₹1499",
+    discountPersent: "66% off",
     size: [
       {
         name: "S",
@@ -185,9 +185,9 @@ export const mens_kurta = [
     brand: "WRODSS",
     title: "Men Solid Cotton Blend Straight Kurta",
     color: "Black",
-    discountedPrice: 277,
-    price: 999,
-    discountPersent: 72,
+    discountedPrice: "₹277",
+    price: "₹999",
+    discountPersent: "72% off",
     size: [
       {
         name: "S",
@@ -215,9 +215,9 @@ export const mens_kurta = [
     brand: "Manthan",
     title: "Men Printed Cotton Blend Straight Kurta",
     color: "Blue",
-    discountedPrice: 765,
-    price: 1049,
-    discountPersent: 27,
+    discountedPrice: "₹765",
+    price: "₹1049",
+    discountPersent: "27% off",
     size: [
       {
         name: "S",
@@ -245,9 +245,9 @@ export const mens_kurta = [
     brand: "RAHUL LOOK",
     title: "Men Solid Pure Cotton Straight Kurta",
     color: "Green",
-    discountedPrice: 499,
-    price: 1599,
-    discountPersent: 68,
+    discountedPrice: "₹499",
+    price: "₹1599",
+    discountPersent: "68% off",
     size: [
       {
         name: "S",
@@ -275,9 +275,9 @@ export const mens_kurta = [
     brand: "FRELURO",
     title: "Men Printed Cotton Blend Straight Kurta",
     color: "Yellow",
-    discountedPrice: 429,
-    price: 999,
-    discountPersent: 57,
+    discountedPrice: "₹429",
+    price: "₹999",
+    discountPersent: "57% off",
     size: [
       {
         name: "S",
@@ -305,9 +305,9 @@ export const mens_kurta = [
     brand: "Manthan",
     title: "Men Self Design Cotton Blend Straight Kurta",
     color: "Light Blue",
-    discountedPrice: 729,
-    price: 909,
-    discountPersent: 27,
+    discountedPrice: "₹729",
+    price: "₹909",
+    discountPersent: "27% off",
     size: [
       {
         name: "S",
@@ -335,9 +335,9 @@ export const mens_kurta = [
     brand: "allan peter",
     title: "Men Solid Pure Cotton Straight Kurta",
     color: "Green",
-    discountedPrice: 449,
-    price: 1749,
-    discountPersent: 74,
+    discountedPrice: "₹449",
+    price: "₹1749",
+    discountPersent: "74% off",
     size: [
       {
         name: "S",
@@ -365,9 +365,9 @@ export const mens_kurta = [
     brand: "COMBRAIDED",
     title: "Men Solid Cotton Blend Straight Kurta",
     color: "Dark Blue",
-    discountedPrice: 449,
-    price: 1499,
-    discountPersent: 70,
+    discountedPrice: "₹449",
+    price: "₹1499",
+    discountPersent: "70% off",
     size: [
       {
         name: "S",
@@ -395,9 +395,9 @@ export const mens_kurta = [
     brand: "FOLGEN",
     title: "Men Solid Cotton Blend Straight Kurta",
     color: "Yellow",
-    discountedPrice: 385,
-    price: 1299,
-    discountPersent: 70,
+    discountedPrice: "₹385",
+    price: "₹1299",
+    discountPersent: "70% off",
     size: [
       {
         name: "S",
@@ -425,9 +425,9 @@ export const mens_kurta = [
     brand: "Tap in",
     title: "Men Solid Cotton Blend Straight Kurta",
     color: "Orange",
-    discountedPrice: 395,
-    price: 1495,
-    discountPersent: 73,
+    discountedPrice: "₹395",
+    price: "₹1495",
+    discountPersent: "73% off",
     size: [
       {
         name: "S",
@@ -455,9 +455,9 @@ export const mens_kurta = [
     brand: "FUBAR",
     title: "Men Printed Cotton Blend Straight Kurta",
     color: "Dark Blue",
-    discountedPrice: 399,
-    price: 1648,
-    discountPersent: 75,
+    discountedPrice: "₹399",
+    price: "₹1648",
+    discountPersent: "75% off",
     size: [
       {
         name: "S",
@@ -485,9 +485,9 @@ export const mens_kurta = [
     brand: "Vida Loca",
     title: "Men Solid Pure Cotton Straight Kurta",
     color: "White",
-    discountedPrice: 599,
-    price: 2499,
-    discountPersent: 76,
+    discountedPrice: "₹599",
+    price: "₹2499",
+    discountPersent: "76% off",
     size: [
       {
         name: "S",
@@ -515,9 +515,9 @@ export const mens_kurta = [
     brand: "Vida Loca",
     title: "Men Self Design Pure Cotton Straight Kurta",
     color: "White",
-    discountedPrice: 629,
-    price: 2499,
-    discountPersent: 74,
+    discountedPrice: "₹629",
+    price: "₹2499",
+    discountPersent: "74% off",
     size: [
       {
         name: "S",
@@ -545,9 +545,9 @@ export const mens_kurta = [
     brand: "Nofilter",
     title: "Men Solid Pure Cotton Straight Kurta",
     color: "White",
-    discountedPrice: 370,
-    price: 1499,
-    discountPersent: 75,
+    discountedPrice: "₹370",
+    price: "₹1499",
+    discountPersent: "75% off",
     size: [
       {
         name: "S",
@@ -575,9 +575,9 @@ export const mens_kurta = [
     brand: "KSH Trendz",
     title: "Men Solid Cotton Blend Straight Kurta",
     color: "Yellow",
-    discountedPrice: 363,
-    price: 1499,
-    discountPersent: 75,
+    discountedPrice: "₹363",
+    price: "₹1499",
+    discountPersent: "75% off",
     size: [
       {
         name: "S",
@@ -605,9 +605,9 @@ export const mens_kurta = [
     brand: "Vida Loca",
     title: "Men Self Design Pure Cotton Straight Kurta",
     color: "Beige",
-    discountedPrice: 629,
-    price: 2499,
-    discountPersent: 74,
+    discountedPrice: "₹629",
+    price: "₹2499",
+    discountPersent: "74% off",
     size: [
       {
         name: "S",
@@ -635,9 +635,9 @@ export const mens_kurta = [
     brand: "Vida Loca",
     title: "Men Self Design Pure Cotton Straight Kurta",
     color: "Light Blue",
-    discountedPrice: 629,
-    price: 2499,
-    discountPersent: 74,
+    discountedPrice: "₹629",
+    price: "₹2499",
+    discountPersent: "74% off",
     size: [
       {
         name: "S",
@@ -665,9 +665,9 @@ export const mens_kurta = [
     brand: "FUBAR",
     title: "Men Printed Cotton Blend Straight Kurta",
     color: "Purple",
-    discountedPrice: 399,
-    price: 1648,
-    discountPersent: 75,
+    discountedPrice: "₹399",
+    price: "₹1648",
+    discountPersent: "75% off",
     size: [
       {
         name: "S",
@@ -695,9 +695,9 @@ export const mens_kurta = [
     brand: "Majestic Man",
     title: "Men Solid Pure Cotton Straight Kurta",
     color: "Pink",
-    discountedPrice: 499,
-    price: 1499,
-    discountPersent: 66,
+    discountedPrice: "₹499",
+    price: "₹1499",
+    discountPersent: "66% off",
     size: [
       {
         name: "S",
@@ -725,9 +725,9 @@ export const mens_kurta = [
     brand: "KSH Trendz",
     title: "Men Solid Cotton Blend Straight Kurta",
     color: "Yellow",
-    discountedPrice: 265,
-    price: 1499,
-    discountPersent: 82,
+    discountedPrice: "₹265",
+    price: "₹1499",
+    discountPersent: "82% off",
     size: [
       {
         name: "S",
@@ -755,9 +755,9 @@ export const mens_kurta = [
     brand: "ARMAAN ETHNIC",
     title: "Men Self Design Cotton Blend Straight Kurta",
     color: "Blue",
-    discountedPrice: 483,
-    price: 1999,
-    discountPersent: 75,
+    discountedPrice: "₹483",
+    price: "₹1999",
+    discountPersent: "75% off",
     size: [
       {
         name: "S",
@@ -785,9 +785,9 @@ export const mens_kurta = [
     brand: "Majestic Man",
     title: "Men Printed Pure Cotton Straight Kurta",
     color: "Light Green",
-    discountedPrice: 499,
-    price: 1499,
-    discountPersent: 66,
+    discountedPrice: "₹499",
+    price: "₹1499",
+    discountPersent: "66% off",
     size: [
       {
         name: "S",
@@ -815,9 +815,9 @@ export const mens_kurta = [
     brand: "Majestic Man",
     title: "Men Printed Pure Cotton Straight Kurta",
     color: "Orange",
-    discountedPrice: 499,
-    price: 1499,
-    discountPersent: 66,
+    discountedPrice: "₹499",
+    price: "₹1499",
+    discountPersent: "66% off",
     size: [
       {
         name: "S",
@@ -845,9 +845,9 @@ export const mens_kurta = [
     brand: "FUBAR",
     title: "Men Printed Cotton Blend Straight Kurta",
     color: "Maroon",
-    discountedPrice: 399,
-    price: 1648,
-    discountPersent: 75,
+    discountedPrice: "₹399",
+    price: "₹1648",
+    discountPersent: "75% off",
     size: [
       {
         name: "S",
@@ -875,9 +875,9 @@ export const mens_kurta = [
     brand: "allan peter",
     title: "Men Solid Pure Cotton Straight Kurta",
     color: "Pink",
-    discountedPrice: 449,
-    price: 1749,
-    discountPersent: 74,
+    discountedPrice: "₹449",
+    price: "₹1749",
+    discountPersent: "74% off",
     size: [
       {
         name: "S",
@@ -905,9 +905,9 @@ export const mens_kurta = [
     brand: "DEEMOON",
     title: "Men Floral Print Cotton Blend Straight Kurta",
     color: "Dark Blue",
-    discountedPrice: 468,
-    price: 1599,
-    discountPersent: 70,
+    discountedPrice: "₹468",
+    price: "₹1599",
+    discountPersent: "70% off",
     size: [
       {
         name: "S",
@@ -935,9 +935,9 @@ export const mens_kurta = [
     brand: "allan peter",
     title: "Men Printed Pure Cotton Straight Kurta",
     color: "Dark Blue",
-    discountedPrice: 499,
-    price: 1749,
-    discountPersent: 71,
+    discountedPrice: "₹499",
+    price: "₹1749",
+    discountPersent: "71% off",
     size: [
       {
         name: "S",
@@ -965,9 +965,9 @@ export const mens_kurta = [
     brand: "More & More",
     title: "Men Self Design Cotton Blend Straight Kurta",
     color: "Yellow",
-    discountedPrice: 467,
-    price: 2199,
-    discountPersent: 78,
+    discountedPrice: "₹467",
+    price: "₹2199",
+    discountPersent: "78% off",
     size: [
       {
         name: "S",
@@ -995,9 +995,9 @@ export const mens_kurta = [
     brand: "SG LEMAN",
     title: "Men Printed Pure Silk Straight Kurta",
     color: "Gold",
-    discountedPrice: 810,
-    price: 2499,
-    discountPersent: 67,
+    discountedPrice: "₹810",
+    price: "₹2499",
+    discountPersent: "67% off",
     size: [
       {
         name: "S",
@@ -1025,9 +1025,9 @@ export const mens_kurta = [
     brand: "ALY JOHN",
     title: "Men Solid Pure Cotton Straight Kurta",
     color: "Maroon",
-    discountedPrice: 478,
-    price: 1279,
-    discountPersent: 62,
+    discountedPrice: "₹478",
+    price: "₹1279",
+    discountPersent: "62% off",
     size: [
       {
         name: "S",
@@ -1055,9 +1055,9 @@ export const mens_kurta = [
     brand: "FUBAR",
     title: "Men Striped Cotton Blend Straight Kurta",
     color: "Black",
-    discountedPrice: 399,
-    price: 1648,
-    discountPersent: 75,
+    discountedPrice: "₹399",
+    price: "₹1648",
+    discountPersent: "75% off",
     size: [
       {
         name: "S",
@@ -1081,13 +1081,13 @@ export const mens_kurta = [
   },
   {
     imageUrl:
-      "https://rukminim1.flixcart.com/image/612/612/l3khsi80/kurta/1/c/6/l-mtml0042-328-manthan-original-imagenvzkm3v9vxh.jpeg?q=70",
+      "https://rukminim2.flixcart.com/image/832/832/xif0q/shirt/l/y/i/m-ts-shirt1342-tanip-original-imagwwsd9wf4kgm5.jpeg?q=70&crop=false",
     brand: "Manthan",
     title: "Men Printed Cotton Blend Ethnic Dress",
     color: "Orange",
-    discountedPrice: 948,
-    price: 1299,
-    discountPersent: 27,
+    discountedPrice: "₹948",
+    price: "₹1299",
+    discountPersent: "27% off",
     size: [
       {
         name: "S",
@@ -1115,9 +1115,9 @@ export const mens_kurta = [
     brand: "Vida Loca",
     title: "Pack of 2 Men Solid Pure Cotton Straight Kurta",
     color: "Multicolor",
-    discountedPrice: 994,
-    price: 2499,
-    discountPersent: 60,
+    discountedPrice: "₹994",
+    price: "₹2499",
+    discountPersent: "60% off",
     size: [
       {
         name: "S",
@@ -1145,9 +1145,9 @@ export const mens_kurta = [
     brand: "SPOQUE",
     title: "Men Solid Pure Cotton Straight Kurta",
     color: "Pink",
-    discountedPrice: 362,
-    price: 1499,
-    discountPersent: 75,
+    discountedPrice: "₹362",
+    price: "₹1499",
+    discountPersent: "75% off",
     size: [
       {
         name: "S",
@@ -1175,9 +1175,9 @@ export const mens_kurta = [
     brand: "Nofilter",
     title: "Men Solid Pure Cotton Straight Kurta",
     color: "White",
-    discountedPrice: 393,
-    price: 1599,
-    discountPersent: 75,
+    discountedPrice: "₹393",
+    price: "₹1599",
+    discountPersent: "75% off",
     size: [
       {
         name: "S",

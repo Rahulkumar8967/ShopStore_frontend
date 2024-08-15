@@ -32,6 +32,12 @@ npm install @heroicons/react
 ```
 npm i react-alice-carousel
 ```
+9.
+```
+npm install @tailwindcss/forms
+```
+
+
 
 
 
