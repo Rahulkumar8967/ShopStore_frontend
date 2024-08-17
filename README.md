@@ -36,6 +36,10 @@ npm i react-alice-carousel
 ```
 npm install @tailwindcss/forms
 ```
+10.
+```
+ npm i react-router-dom
+ ```
 
 
 

@@ -16,6 +16,7 @@ import {
   RadioGroup,
 } from "@mui/material";
 import FilterListIcon from "@mui/icons-material/FilterList";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const sortOptions = [
   { name: "Price: Low to High", current: false },
@@ -32,22 +33,53 @@ export default function Product() {
   const [filterOptions, setFilterOptions] = useState({});
   const [radioFilter, setRadioFilter] = useState(null);
 
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const handleSortChange = (option) => {
     setSelectedSortOption(option);
-    // Sorting logic based on the selected option
+
+    // Sorting logic (assuming mens_kurta is the array you want to sort)
+    const sortedProducts = [...mens_kurta];
+
+    if (option.name === "Price: Low to High") {
+      sortedProducts.sort((a, b) => a.price - b.price);
+    } else if (option.name === "Price: High to Low") {
+      sortedProducts.sort((a, b) => b.price - a.price);
+    }
+
+    // Update the state or whatever needs to be done after sorting
+    // e.g., setMensKurta(sortedProducts);
   };
 
   const handleFilter = (value, sectionId) => {
-    setFilterOptions((prev) => ({
-      ...prev,
-      [sectionId]: prev[sectionId]?.includes(value)
-        ? prev[sectionId].filter((item) => item !== value)
-        : [...(prev[sectionId] || []), value],
-    }));
+    const searchParams = new URLSearchParams(location.search);
+
+    let filterValue = searchParams.get(sectionId) || "";
+    let filterArray = filterValue ? filterValue.split(",") : [];
+
+    if (filterArray.includes(value)) {
+      filterArray = filterArray.filter((item) => item !== value);
+    } else {
+      filterArray.push(value);
+    }
+
+    if (filterArray.length === 0) {
+      searchParams.delete(sectionId);
+    } else {
+      searchParams.set(sectionId, filterArray.join(","));
+    }
+
+    const query = searchParams.toString();
+    navigate({ search: `?${query}` });
   };
 
   const handleRadioFilterChange = (e, sectionId) => {
     setRadioFilter({ [sectionId]: e.target.value });
+
+    const searchParams = new URLSearchParams(location.search);
+    searchParams.set(sectionId, e.target.value);
+    navigate({ search: `?${searchParams.toString()}` });
   };
 
   return (
@@ -89,7 +121,7 @@ export default function Product() {
 
         <main className="mx-auto px-4 sm:px-6 lg:px-15">
           <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900">
+            <h1 className="text-4xl font-bold tracking-tight text-gray-900 pl-15">
               New Arrivals
             </h1>
 
@@ -151,7 +183,7 @@ export default function Product() {
               </button>
             </div>
           </div>
-{/*  */}
+          {/*  */}
           <section aria-labelledby="products-heading" className="pb-24 pt-6">
             <h2 id="products-heading" className="sr-only">
               Products
@@ -160,21 +192,23 @@ export default function Product() {
             <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">
               <div>
                 <div className="py-5 flex justify-between item-center">
-                  <h1 className="text-lg opacity-50 font-bold">Filters</h1>
+                  <h1 className="text-lg opacity-50 font-bold pl-5 py-2">
+                    Filters
+                  </h1>
                   <FilterListIcon />
                 </div>
 
-                <form className="mt-4 border-t border-gray-200">
+                <form className="mt-4 border-t border-gray-200 pl-6">
                   {filters.map((section) => (
                     <Disclosure
                       as="div"
                       key={section.id}
-                      className="border-t border-gray-200 px-4 py-6"
+                      className="border-t border-gray-200 px-3 py-6"
                     >
                       {({ open }) => (
                         <>
                           <h3 className="-mx-2 -my-3 flow-root">
-                            <Disclosure.Button className="flex w-full items-center justify-between bg-white px-right-10 py-3  text-gray-400 hover:text-gray-500">
+                            <Disclosure.Button className="flex w-full items-center justify-between bg-white px-right-10 py-3 text-gray-400 hover:text-gray-500">
                               <span className="font-medium text-gray-900">
                                 {section.name}
                               </span>
@@ -225,69 +259,43 @@ export default function Product() {
                       )}
                     </Disclosure>
                   ))}
-
-                  {singleFilter.map((section) => (
-                    <Disclosure
-                      as="div"
-                      key={section.id}
-                      className="border-b border-gray-200 py-6"
-                    >
-                      {({ open }) => (
-                        <>
-                          <h3 className="-my-3 flow-root">
-                            <Disclosure.Button className="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500">
-                              <span className="font-medium text-gray-900">
-                                {section.name}
-                              </span>
-                              <span className="ml-6 flex items-center">
-                                {open ? (
-                                  <MinusIcon
-                                    className="h-5 w-5"
-                                    aria-hidden="true"
-                                  />
-                                ) : (
-                                  <PlusIcon
-                                    className="h-5 w-5"
-                                    aria-hidden="true"
-                                  />
-                                )}
-                              </span>
-                            </Disclosure.Button>
-                          </h3>
-                          <Disclosure.Panel className="pt-6">
-                            <FormControl>
-                              <RadioGroup
-                                aria-labelledby="demo-radio-buttons-group-label"
-                                defaultValue="female"
-                                name="radio-buttons-group"
-                              >
-                                {section.options.map((option, optionIdx) => (
-                                  <FormControlLabel
-                                    key={option.value}
-                                    value={option.value}
-                                    control={<Radio />}
-                                    label={option.label}
-                                    onChange={(e) =>
-                                      handleRadioFilterChange(e, section.id)
-                                    }
-                                  />
-                                ))}
-                              </RadioGroup>
-                            </FormControl>
-                          </Disclosure.Panel>
-                        </>
-                      )}
-                    </Disclosure>
-                  ))}
                 </form>
+
+                <FormControl className="mt-4 border-t border-gray-200">
+                  {singleFilter.map((section, sectionIdx) => (
+                    <div
+                      key={sectionIdx}
+                      className="border-t border-gray-200 px-4 py-6"
+                    >
+                      <RadioGroup
+                        name={section.id}
+                        value={radioFilter ? radioFilter[section.id] : ""}
+                        onChange={(e) => handleRadioFilterChange(e, section.id)}
+                      >
+                        {section.options.map((option, optionIdx) => (
+                          <FormControlLabel
+                            key={optionIdx}
+                            value={option.value}
+                            control={<Radio />}
+                            label={option.label}
+                          />
+                        ))}
+                      </RadioGroup>
+                    </div>
+                  ))}
+                </FormControl>
               </div>
 
-              {/* Product grid */}
-              <div className="lg:col-span-4 w-full">
-                <div className="flex flex-wrap justify-center bg-white py-5">
-                  {mens_kurta.map((item) => (
-                    <ProductCard key={item.id} product={item} />
-                  ))}
+              <div className="lg:col-span-4">
+                <div className="border-2 border-gray-200 rounded-lg">
+                  <div className="p-4">
+                    {/* Products grid */}
+                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                      {mens_kurta.map((product) => (
+                        <ProductCard key={product.id} product={product} />
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
