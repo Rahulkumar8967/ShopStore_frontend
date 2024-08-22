@@ -13,8 +13,8 @@ function App() {
     <Navigation />
     <div>
         {/*<HomePage />*/}
-        {/* <Product /> */}
-        {/*<ProductDetails />*/}
+       {/* <Product />  */}
+      {/*<ProductDetails />*/}
         <Cart />
       </div>
   <Footer />
