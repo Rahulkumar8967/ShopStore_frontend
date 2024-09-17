@@ -38,10 +38,13 @@ npm install @tailwindcss/forms
 ```
 10.
 ```
- npm i react-router-dom
+  npm i redux redux-thunk react-redux axios 
  ```
 
-
+11. for state managing using redux
+```
+npm i redux
+```
  # 1. Getting Started with Backend
  ```
  npm init -y
@@ -54,6 +57,7 @@ npm install @tailwindcss/forms
  ```
  npm i bcrypt cors dotenv jsonwebtoken mongoose nodemon razorpay
  ``` 
+ 
 
 
 
