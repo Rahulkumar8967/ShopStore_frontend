@@ -42,6 +42,22 @@ npm install @tailwindcss/forms
  ```
 
 
+ # 1. Getting Started with Backend
+ ```
+ npm init -y
+ ```
+ 2. 
+ ```
+ npm i express
+ ```
+ 3. 
+ ```
+ npm i bcrypt cors dotenv jsonwebtoken mongoose nodemon razorpay
+ ``` 
+
+
+
+
 
 
 
