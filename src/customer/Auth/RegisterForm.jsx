@@ -1,4 +1,3 @@
-// RegisterForm.jsx
 import {
   Grid,
   TextField,
@@ -9,20 +8,22 @@ import {
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import {useDispatch, useSelector} from 'react-redux'
 import { getUser, register } from "../../State/Auth/Action";
 
 const RegisterForm = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const jwt = localStorage.getItem("jwt");
-  const { auth } = useSelector(store => store);
 
-  useEffect(() => {
-    if (jwt) {
-      dispatch(getUser(jwt));
-    }
-  }, [jwt, auth.jwt, dispatch]);
+  const navigate = useNavigate();
+const dispatch=useDispatch();
+const jwt=localStorage.getItem("jwt")
+const {auth}=useSelector(store=>store)
+
+useEffect(()=>{
+  if(jwt){
+    dispatch(getUser(jwt))
+  }
+},[jwt,auth.jwt])
+
 
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
@@ -38,10 +39,10 @@ const RegisterForm = () => {
       email: data.get("email"),
       password: data.get("password"),
     };
-
-    dispatch(register(userData));
+  dispatch(register(userData))  
     console.log("userData", userData);
   };
+
 
   const handlePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -51,8 +52,9 @@ const RegisterForm = () => {
     setPassword(event.target.value);
   };
 
+
   return (
-    <div className="register-form-container">
+    <div>
       <form onSubmit={handleSubmit}>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
@@ -125,19 +127,17 @@ const RegisterForm = () => {
         </Grid>
       </form>
 
-      <div className="flex flex-col items-center justify-center mt-6">
-        <div className="py-3 flex items-center space-x-3 bg-white shadow-md px-5 py-3 rounded-lg border border-gray-200">
-          <p className="text-lg text-gray-700 font-medium">
-            Already have an account?
-          </p>
-          <Button
-            onClick={() => navigate("/login")}
-            className="ml-5 text-white bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg shadow-md transition-all duration-300"
-          >
-            Login
-          </Button>
-        </div>
-      </div>
+      <div className="flex flex-col items-center justify-center">
+  <div className="py-3 flex items-center space-x-3 bg-white shadow-md px-5 py-3 rounded-lg border border-gray-200">
+    <p className="text-lg text-gray-700 font-medium">Already have an account?</p>
+    <Button
+      onClick={() => navigate("/login")}
+      className="ml-5 text-white bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg shadow-md transition-all duration-300"
+    >
+      Login
+    </Button>
+  </div>
+</div>
     </div>
   );
 };

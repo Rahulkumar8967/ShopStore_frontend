@@ -8,9 +8,14 @@ import {
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../../State/Auth/Action";
 
 const LoginForm = () => {
+  const dispatch=useDispatch();
   const navigate=useNavigate();
+
+  
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
 
@@ -19,12 +24,15 @@ const LoginForm = () => {
 
     const data = new FormData(e.currentTarget);
 
-    const loginData = {
+    const userData = {
       email: data.get("email"),
       password: data.get("password"),
     };
-    console.log("loginData", loginData);
+
+   dispatch(login(userData))
+    console.log("login user", userData);
   };
+
 
   const handlePasswordVisibility = () => {
     setShowPassword(!showPassword);

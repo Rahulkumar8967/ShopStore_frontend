@@ -13,7 +13,7 @@ import { navigation } from "./NavigationData";
 import { useLocation, useNavigate } from "react-router-dom";
 import AuthModel from "../../Auth/AuthModal";
 import { useDispatch, useSelector } from "react-redux";
-import { getUser } from "../../../State/Auth/Action";
+import { getUser, logout } from "../../../State/Auth/Action";
 
 
 
@@ -29,12 +29,10 @@ export default function Navigation() {
   const [openAuthModal, setOpenAuthModal] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const openUserMenu = Boolean(anchorEl);
-  const jwt = localStorage.getItem("jwt");
-
-  const {auth}=useSelector(store=>store)
-const dispatch=useDispatch();
-const location=useLocation();
-
+ const jwt = localStorage.getItem("jwt")
+ const {auth}=useSelector(store=>store)
+ const dispatch = useDispatch();
+const location = useLocation();
 
   const handleUserClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -48,23 +46,21 @@ const location=useLocation();
   };
   const handleClose = () => {
     setOpenAuthModal(false);
-   
+    
   };
 
   const handleCategoryClick = (category, section, item, close) => {
-    navigate(`/${category.id}/${section.id}/${item.id}`);
+   navigate(`/${category.id}/${section.id}/${item.id}`);
     close();
   };
-  
 
   useEffect(()=>{
     if(jwt){
-    dispatch(getUser(jwt))
-  
+      dispatch(getUser(jwt))
     }
   },[jwt,auth.jwt])
-useEffect(()=>{
 
+useEffect(()=>{
 if(auth.user){
   handleClose()
 }
@@ -72,6 +68,12 @@ if(location.pathname==="/login" || location.pathname==="/register"){
   navigate(-1)
 }
 },[auth.user])
+
+
+const handleLogout=()=>{
+  dispatch(logout())
+  handleCloseUserMenu()
+}
 
   return (
     <div className="bg-white pb-10">
@@ -401,7 +403,7 @@ if(location.pathname==="/login" || location.pathname==="/register"){
 
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                  {false ? (
+                  {auth.user?.firstName ? (
                     <div>
                       <Avatar
                         className="text-white"
@@ -416,7 +418,8 @@ if(location.pathname==="/login" || location.pathname==="/register"){
                           cursor: "pointer",
                         }}
                       >
-                        R
+                      {auth.user?.firstName[0].toUpperCase()
+                      }
                       </Avatar>
                      
                       
@@ -432,7 +435,10 @@ if(location.pathname==="/login" || location.pathname==="/register"){
                         <MenuItem>Profile</MenuItem>
 
                         <MenuItem onClick={()=>navigate("/account/order")}>My Orders</MenuItem>
-                        <MenuItem>Logout</MenuItem>
+
+                        <MenuItem onClick={handleLogout}>
+                        Logout
+                        </MenuItem>
                       </Menu>
                     </div>
                   ) : (
