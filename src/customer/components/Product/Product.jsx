@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Dialog, Disclosure, Transition, Menu } from "@headlessui/react";
 import {
   FunnelIcon,
@@ -16,7 +16,9 @@ import {
   RadioGroup,
 } from "@mui/material";
 import FilterListIcon from "@mui/icons-material/FilterList";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { findProducts } from "../../../State/Product/Action";
 
 const sortOptions = [
   { name: "Price: Low to High", current: false },
@@ -35,6 +37,20 @@ export default function Product() {
 
   const location = useLocation();
   const navigate = useNavigate();
+  const param = useParams();
+  const dispatch=useDispatch();
+
+const decodedQueryString=decodeURIComponent(location.search);
+const searchParams=new URLSearchParams(decodedQueryString);
+const colorValue=searchParams.get("color")
+const sizeValue=searchParams.get("size")
+const priceValue=searchParams.get("price")
+const discount=searchParams.get("discount");
+const sortValue=searchParams.get("sort");
+const pageNumber=searchParams.get("page") || 1;
+const stock=searchParams.get("stock");
+
+
 
   const handleSortChange = (option) => {
     setSelectedSortOption(option);
@@ -48,8 +64,7 @@ export default function Product() {
       sortedProducts.sort((a, b) => b.price - a.price);
     }
 
-    // Update the state or whatever needs to be done after sorting
-    // e.g., setMensKurta(sortedProducts);
+   
   };
 
   const handleFilter = (value, sectionId) => {
@@ -81,6 +96,37 @@ export default function Product() {
     searchParams.set(sectionId, e.target.value);
     navigate({ search: `?${searchParams.toString()}` });
   };
+
+
+  useEffect(() => {
+    const [minPrice, maxPrice] =
+      priceValue === null ? [0, 0] : priceValue.split("-").map(Number);
+    const data = {
+      category: param.lavelThree,
+      colors: colorValue || [],
+      sizes: sizeValue || [],
+      minPrice: minPrice || 0,
+      maxPrice: maxPrice || 10000,
+      minDiscount: discount || 0,
+      sort: sortValue || "price_low",
+      pageNumber: pageNumber-1 ,
+      pageSize: 10,
+      stock: stock,
+    };
+    dispatch(findProducts(data));
+  }, [
+    param.lavelThree,
+    colorValue,
+    sizeValue,
+    priceValue,
+    discount,
+    sortValue,
+    pageNumber,
+    stock,
+  ]);
+  
+  
+
 
   return (
     <div className="bg-white">
