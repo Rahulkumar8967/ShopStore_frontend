@@ -21,7 +21,8 @@ export const get = () => async (dispatch) => {
     const { data } = await api.get(`/api/cart/`);
     dispatch({ type: GET_CART_SUCCESS, payload: data });
   } catch (error) {
-    dispatch({ type: GET_CART_FAILURE, payload: error.message });
+    const errorMessage = error.response ? error.response.data.message : "An error occurred while fetching the cart";
+    dispatch({ type: GET_CART_FAILURE, payload: errorMessage });
   }
 };
 
@@ -32,7 +33,8 @@ export const addItemToCart = (reqData) => async (dispatch) => {
     const { data } = await api.put("/api/cart/add", reqData.data);
     dispatch({ type: ADD_ITEM_TO_CART_SUCCESS, payload: data });
   } catch (error) {
-    dispatch({ type: ADD_ITEM_TO_CART_FAILURE, payload: error.message });
+    const errorMessage = error.response ? error.response.data.message : "An error occurred while adding the item to the cart";
+    dispatch({ type: ADD_ITEM_TO_CART_FAILURE, payload: errorMessage });
   }
 };
 
@@ -40,13 +42,11 @@ export const removeCartItem = (reqData) => async (dispatch) => {
   dispatch({ type: REMOVE_CART_ITEM_REQUEST });
 
   try {
-    const { data } = await api.delete(
-      `/api/cart_items/${reqData.cartItemId}`,
-      reqData.data
-    );
+    const { data } = await api.delete(`/api/cart_items/${reqData.cartItemId}`);
     dispatch({ type: REMOVE_CART_ITEM_SUCCESS, payload: data });
   } catch (error) {
-    dispatch({ type: REMOVE_CART_ITEM_FAILURE, payload: error.message });
+    const errorMessage = error.response ? error.response.data.message : "An error occurred while removing the item from the cart";
+    dispatch({ type: REMOVE_CART_ITEM_FAILURE, payload: errorMessage });
   }
 };
 
@@ -54,12 +54,10 @@ export const updateCartItem = (reqData) => async (dispatch) => {
   dispatch({ type: UPDATE_CART_ITEM_REQUEST });
 
   try {
-    const { data } = await api.put(
-      `/api/cart_items/${reqData.cartItemId}`,
-      reqData.data
-    );
+    const { data } = await api.put(`/api/cart_items/${reqData.cartItemId}`, reqData.data);
     dispatch({ type: UPDATE_CART_ITEM_SUCCESS, payload: data });
   } catch (error) {
-    dispatch({ type: UPDATE_CART_ITEM_FAILURE, payload: error.message });
+    const errorMessage = error.response ? error.response.data.message : "An error occurred while updating the cart item";
+    dispatch({ type: UPDATE_CART_ITEM_FAILURE, payload: errorMessage });
   }
 };

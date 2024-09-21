@@ -1,11 +1,11 @@
 import {
-  FIND_PRODUCT_BY_ID_FAILURE,
   FIND_PRODUCT_BY_ID_REQUEST,
   FIND_PRODUCT_BY_ID_SUCCESS,
-  FIND_PRODUCT_FAILURE,
+  FIND_PRODUCT_BY_ID_FAILURE,
   FIND_PRODUCT_REQUEST,
   FIND_PRODUCT_SUCCESS,
-} from "./ActionType";
+  FIND_PRODUCT_FAILURE,
+} from "./ActionType"; 
 
 const initialState = {
   products: [],
@@ -14,7 +14,7 @@ const initialState = {
   error: null,
 };
 
-export const customProductReducer = (state = initialState, action) => {
+export const customerProductReducer = (state = initialState, action) => {
   switch (action.type) {
     case FIND_PRODUCT_REQUEST:
     case FIND_PRODUCT_BY_ID_REQUEST:
@@ -33,7 +33,7 @@ export const customProductReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: null,
-        product: action.payload,  // Changed from `products` to `product`
+        product: action.payload,
       };
 
     case FIND_PRODUCT_FAILURE:

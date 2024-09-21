@@ -1,5 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import { Dialog, Disclosure, Transition, Menu } from "@headlessui/react";
+
 import {
   FunnelIcon,
   MinusIcon,
@@ -12,12 +13,13 @@ import { filters, singleFilter } from "./FilterData";
 import {
   FormControl,
   FormControlLabel,
+  Pagination,
   Radio,
   RadioGroup,
 } from "@mui/material";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { findProducts } from "../../../State/Product/Action";
 
 const sortOptions = [
@@ -39,6 +41,7 @@ export default function Product() {
   const navigate = useNavigate();
   const param = useParams();
   const dispatch=useDispatch();
+const {product}=useSelector(store=>store)
 
 const decodedQueryString=decodeURIComponent(location.search);
 const searchParams=new URLSearchParams(decodedQueryString);
@@ -50,7 +53,12 @@ const sortValue=searchParams.get("sort");
 const pageNumber=searchParams.get("page") || 1;
 const stock=searchParams.get("stock");
 
-
+const handlePaginationChange=(event,value)=>{
+  const searchParams=new URLSearchParams(location.search)
+  searchParams.set("page",value);
+  const query=searchParams.toString();
+  navigate({search:`?${query}`})
+}
 
   const handleSortChange = (option) => {
     setSelectedSortOption(option);
@@ -100,7 +108,7 @@ const stock=searchParams.get("stock");
 
   useEffect(() => {
     const [minPrice, maxPrice] =
-      priceValue === null ? [0, 0] : priceValue.split("-").map(Number);
+      priceValue === null ? [0, 10000] : priceValue.split("-").map(Number);
     const data = {
       category: param.lavelThree,
       colors: colorValue || [],
@@ -337,14 +345,21 @@ const stock=searchParams.get("stock");
                   <div className="p-4">
                     {/* Products grid */}
                     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                      {mens_kurta.map((product) => (
-                        <ProductCard key={product.id} product={product} />
+                      {product.products && product.products?.content?.map((item) => (
+                        <ProductCard product={item} />
                       ))}
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+          </section>
+
+          <section className="w-full px-[3.6rem]">
+          <div className="px-4 py-5 flex justify-center">
+            <Pagination count={product.products?.totalPages} color="secondary" onChange={handlePaginationChange}/>
+            
+            </div>  
           </section>
         </main>
       </div>

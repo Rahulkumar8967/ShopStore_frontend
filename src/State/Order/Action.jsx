@@ -17,7 +17,6 @@ export const createOrder = (reqData) => async (dispatch) => {
      dispatch({ type: CREATE_ORDER_REQUEST });        
  // console.log("req data ", reqData);
   try {
-   
 
     const { data } = await api.post(
       `/api/orders/`,
