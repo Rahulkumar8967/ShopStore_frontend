@@ -8,6 +8,7 @@ import {
   FIND_PRODUCT_SUCCESS,
 } from "./ActionType";
 
+// Action to fetch products based on filters
 export const findProducts = (reqData) => async (dispatch) => {
   dispatch({ type: FIND_PRODUCT_REQUEST });
 
@@ -37,16 +38,18 @@ export const findProducts = (reqData) => async (dispatch) => {
   }
 };
 
+// Action to fetch a product by its ID
 export const findProductById = (reqData) => async (dispatch) => {
   dispatch({ type: FIND_PRODUCT_BY_ID_REQUEST });
+
   const { productId } = reqData;
-  
+
   try {
     const { data } = await api.get(`/api/products/id/${productId}`);
+    console.log("Fetched product data:", data);
     dispatch({ type: FIND_PRODUCT_BY_ID_SUCCESS, payload: data });
   } catch (error) {
     const errorMessage = error.message;
     dispatch({ type: FIND_PRODUCT_BY_ID_FAILURE, payload: errorMessage });
   }
 };
-

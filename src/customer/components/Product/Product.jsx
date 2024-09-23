@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import { Dialog, Disclosure, Transition, Menu } from "@headlessui/react";
-
+import { XMarkIcon } from "@heroicons/react/24/outline";
 import {
   FunnelIcon,
   MinusIcon,
@@ -40,30 +40,30 @@ export default function Product() {
   const location = useLocation();
   const navigate = useNavigate();
   const param = useParams();
-  const dispatch=useDispatch();
-const {product}=useSelector(store=>store)
 
-const decodedQueryString=decodeURIComponent(location.search);
-const searchParams=new URLSearchParams(decodedQueryString);
-const colorValue=searchParams.get("color")
-const sizeValue=searchParams.get("size")
-const priceValue=searchParams.get("price")
-const discount=searchParams.get("discount");
-const sortValue=searchParams.get("sort");
-const pageNumber=searchParams.get("page") || 1;
-const stock=searchParams.get("stock");
+  const dispatch = useDispatch();
+  const { product } = useSelector((store) => store);
 
-const handlePaginationChange=(event,value)=>{
-  const searchParams=new URLSearchParams(location.search)
-  searchParams.set("page",value);
-  const query=searchParams.toString();
-  navigate({search:`?${query}`})
-}
+  const decodedQueryString = decodeURIComponent(location.search);
+  const searchParams = new URLSearchParams(decodedQueryString);
+  const colorValue = searchParams.get("color");
+  const sizeValue = searchParams.get("size");
+  const priceValue = searchParams.get("price");
+  const discount = searchParams.get("discount");
+  const sortValue = searchParams.get("sort");
+  const pageNumber = searchParams.get("page") || 1;
+  const stock = searchParams.get("stock");
+
+  const handlePaginationChange = (event, value) => {
+    const searchParams = new URLSearchParams(location.search);
+    searchParams.set("page", value);
+    const query = searchParams.toString();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    navigate({ search: `?${query}` });
+  };
 
   const handleSortChange = (option) => {
     setSelectedSortOption(option);
-
-    // Sorting logic (assuming mens_kurta is the array you want to sort)
     const sortedProducts = [...mens_kurta];
 
     if (option.name === "Price: Low to High") {
@@ -71,13 +71,10 @@ const handlePaginationChange=(event,value)=>{
     } else if (option.name === "Price: High to Low") {
       sortedProducts.sort((a, b) => b.price - a.price);
     }
-
-   
   };
 
   const handleFilter = (value, sectionId) => {
     const searchParams = new URLSearchParams(location.search);
-
     let filterValue = searchParams.get(sectionId) || "";
     let filterArray = filterValue ? filterValue.split(",") : [];
 
@@ -105,7 +102,6 @@ const handlePaginationChange=(event,value)=>{
     navigate({ search: `?${searchParams.toString()}` });
   };
 
-
   useEffect(() => {
     const [minPrice, maxPrice] =
       priceValue === null ? [0, 10000] : priceValue.split("-").map(Number);
@@ -117,7 +113,7 @@ const handlePaginationChange=(event,value)=>{
       maxPrice: maxPrice || 10000,
       minDiscount: discount || 0,
       sort: sortValue || "price_low",
-      pageNumber: pageNumber-1 ,
+      pageNumber: pageNumber - 1,
       pageSize: 10,
       stock: stock,
     };
@@ -132,19 +128,16 @@ const handlePaginationChange=(event,value)=>{
     pageNumber,
     stock,
   ]);
-  
-  
-
 
   return (
     <div className="bg-white">
       <div>
         {/* Mobile filter dialog */}
-        <Transition show={mobileFiltersOpen} as={Fragment}>
+        <Transition.Root show={mobileFiltersOpen} as={Fragment}>
           <Dialog
-            open={mobileFiltersOpen}
-            onClose={() => setMobileFiltersOpen(false)}
-            className="fixed inset-0 z-40 flex"
+            as="div"
+            className="relative z-40 lg:hidden"
+            onClose={setMobileFiltersOpen}
           >
             <Transition.Child
               as={Fragment}
@@ -155,23 +148,51 @@ const handlePaginationChange=(event,value)=>{
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-25" />
+              <div className="fixed inset-0 bg-black bg-opacity-25" />
             </Transition.Child>
-            <Transition.Child
-              as={Fragment}
-              enter="transition ease-in-out duration-300 transform"
-              enterFrom="translate-x-full"
-              enterTo="translate-x-0"
-              leave="transition ease-in-out duration-300 transform"
-              leaveFrom="translate-x-0"
-              leaveTo="translate-x-full"
-            >
-              <div className="relative ml-auto flex h-full w-full max-w-xs flex-col overflow-y-auto bg-white py-4 pb-12 shadow-xl">
-                {/* Dialog content */}
-              </div>
-            </Transition.Child>
+
+            <div className="fixed inset-0 z-40 flex">
+              <Transition.Child
+                as={Fragment}
+                enter="transition ease-in-out duration-300 transform"
+                enterFrom="translate-x-full"
+                enterTo="translate-x-0"
+                leave="transition ease-in-out duration-300 transform"
+                leaveFrom="translate-x-0"
+                leaveTo="translate-x-full"
+              >
+                <Dialog.Panel className="relative ml-auto flex h-full w-full max-w-xs flex-col overflow-y-auto bg-white py-4 pb-12 shadow-xl">
+                  <div className="flex items-center justify-between px-4">
+                    <h2 className="text-lg font-medium text-gray-900">
+                      Filters
+                    </h2>
+                    <button
+                      type="button"
+                      className="-mr-2 flex h-10 w-10 items-center justify-center rounded-md bg-white p-2 text-gray-400"
+                      onClick={() => setMobileFiltersOpen(false)}
+                    >
+                      <span className="sr-only">Close menu</span>
+                      <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+                    </button>
+                  </div>
+
+                  {/* Remove this filters rendering if you want to keep it only in the main view */}
+                  {/* <form className="mt-4 border-t border-gray-200">
+            {filters.map((section) => (
+              <Disclosure
+                as="div"
+                key={section.id}
+                className="border-t border-gray-200 px-4 py-6"
+              >
+                ...
+              </Disclosure>
+            ))}
+          </form> */}
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
           </Dialog>
-        </Transition>
+        </Transition.Root>
 
         <main className="mx-auto px-4 sm:px-6 lg:px-15">
           <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
@@ -238,6 +259,7 @@ const handlePaginationChange=(event,value)=>{
             </div>
           </div>
           {/*  */}
+
           <section aria-labelledby="products-heading" className="pb-24 pt-6">
             <h2 id="products-heading" className="sr-only">
               Products
@@ -313,31 +335,62 @@ const handlePaginationChange=(event,value)=>{
                       )}
                     </Disclosure>
                   ))}
-                </form>
 
-                <FormControl className="mt-4 border-t border-gray-200">
-                  {singleFilter.map((section, sectionIdx) => (
-                    <div
-                      key={sectionIdx}
-                      className="border-t border-gray-200 px-4 py-6"
+                  {singleFilter.map((section) => (
+                    <Disclosure
+                      // defaultOpen={true}
+                      as="div"
+                      key={section.id}
+                      className="border-b border-gray-200 py-6"
                     >
-                      <RadioGroup
-                        name={section.id}
-                        value={radioFilter ? radioFilter[section.id] : ""}
-                        onChange={(e) => handleRadioFilterChange(e, section.id)}
-                      >
-                        {section.options.map((option, optionIdx) => (
-                          <FormControlLabel
-                            key={optionIdx}
-                            value={option.value}
-                            control={<Radio />}
-                            label={option.label}
-                          />
-                        ))}
-                      </RadioGroup>
-                    </div>
+                      {({ open }) => (
+                        <>
+                          <h3 className="-my-3 flow-root">
+                            <Disclosure.Button className="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500">
+                              <span className="font-medium text-gray-900">
+                                {section.name}
+                              </span>
+                              <span className="ml-6 flex items-center">
+                                {open ? (
+                                  <MinusIcon
+                                    className="h-5 w-5"
+                                    aria-hidden="true"
+                                  />
+                                ) : (
+                                  <PlusIcon
+                                    className="h-5 w-5"
+                                    aria-hidden="true"
+                                  />
+                                )}
+                              </span>
+                            </Disclosure.Button>
+                          </h3>
+
+                          <Disclosure.Panel className="pt-6">
+                            <FormControl>
+                              <RadioGroup
+                                aria-labelledby="demo-radio-buttons-group-label"
+                                defaultValue="female"
+                                name="radio-buttons-group"
+                              >
+                                {section.options.map((option, optionIdx) => (
+                                  <FormControlLabel
+                                    value={option.value}
+                                    control={<Radio />}
+                                    label={option.label}
+                                    onChange={(e) =>
+                                      handleRadioFilterChange(e, section.id)
+                                    }
+                                  />
+                                ))}
+                              </RadioGroup>
+                            </FormControl>
+                          </Disclosure.Panel>
+                        </>
+                      )}
+                    </Disclosure>
                   ))}
-                </FormControl>
+                </form>
               </div>
 
               <div className="lg:col-span-4">
@@ -345,9 +398,10 @@ const handlePaginationChange=(event,value)=>{
                   <div className="p-4">
                     {/* Products grid */}
                     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                      {product.products && product.products?.content?.map((item) => (
-                        <ProductCard product={item} />
-                      ))}
+                      {product.products &&
+                        product.products?.content?.map((item) => (
+                          <ProductCard product={item} />
+                        ))}
                     </div>
                   </div>
                 </div>
@@ -356,10 +410,13 @@ const handlePaginationChange=(event,value)=>{
           </section>
 
           <section className="w-full px-[3.6rem]">
-          <div className="px-4 py-5 flex justify-center">
-            <Pagination count={product.products?.totalPages} color="secondary" onChange={handlePaginationChange}/>
-            
-            </div>  
+            <div className="px-4 py-5 flex justify-center">
+              <Pagination
+                count={product.products?.totalPages}
+                color="secondary"
+                onChange={handlePaginationChange}
+              />
+            </div>
           </section>
         </main>
       </div>
