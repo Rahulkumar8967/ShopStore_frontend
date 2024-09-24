@@ -7,6 +7,7 @@ const ProductCard = ({ product }) => {
 
   return (
     <div
+      // later change product.id == product._id
       onClick={() => navigate(`/product/${product._id}`)}
       className="ProductCard w-[15rem] m-2 transition-all cursor-pointer"
     >
@@ -23,10 +24,10 @@ const ProductCard = ({ product }) => {
           <p className="text-sm">{product.title}</p>
         </div>
         <div className="flex items-center space-x-2 text-sm">
-          <p className="font-semibold">{product.discountedPrice}</p>
-          <p className="line-through opacity-50">{product.price}</p>
+          <p className="font-semibold">₹{product.discountedPrice}</p>
+          <p className="line-through opacity-50">₹{product.price}</p>
           <p className="text-green-600 font-semibold">
-            {product.discountPercent}
+            {product.discountPercent}% off
           </p>
         </div>
       </div>

@@ -41,7 +41,7 @@ export default function Product() {
   const param = useParams();
 
   const dispatch = useDispatch();
-  const { product } = useSelector((store) => store);
+  const { customersProduct } = useSelector((store) => store);
 
   // Decoding query string and extracting filters
   const decodedQueryString = decodeURIComponent(location.search);
@@ -67,7 +67,10 @@ export default function Product() {
   const handleSortChange = (option) => {
     setSelectedSortOption(option);
     const searchParams = new URLSearchParams(location.search);
-    searchParams.set("sort", option.name === "Price: Low to High" ? "price_low" : "price_high");
+    searchParams.set(
+      "sort",
+      option.name === "Price: Low to High" ? "price_low" : "price_high"
+    );
     navigate({ search: `?${searchParams.toString()}` });
   };
 
@@ -114,7 +117,7 @@ export default function Product() {
       minDiscount: discount || 0,
       sort: sortValue || "price_low",
       pageNumber: pageNumber - 1,
-      pageSize: 10,
+      pageSize: 6,
       stock: stock,
     };
     dispatch(findProducts(data));
@@ -129,8 +132,6 @@ export default function Product() {
     stock,
   ]);
 
-
-  
   return (
     <div className="bg-white">
       <div>
@@ -400,8 +401,8 @@ export default function Product() {
                   <div className="p-4">
                     {/* Products grid */}
                     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                      {product.products &&
-                        product.products?.content?.map((item) => (
+                      {customersProduct.products &&
+                        customersProduct.products?.content?.map((item) => (
                           <ProductCard product={item} />
                         ))}
                     </div>
@@ -414,7 +415,7 @@ export default function Product() {
           <section className="w-full px-[3.6rem]">
             <div className="px-4 py-5 flex justify-center">
               <Pagination
-                count={product.products?.totalPages}
+                count={customersProduct.products?.totalPages}
                 color="secondary"
                 onChange={handlePaginationChange}
               />

@@ -1,13 +1,13 @@
-"use client";
-
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StarIcon } from "@heroicons/react/20/solid";
 import { RadioGroup } from "@headlessui/react";
 import { Box, Button, Grid, LinearProgress, Rating } from "@mui/material";
 import ProductReviewCard from "./ProductReviewCard";
 import { mens_kurta } from "../../Data/mens_kurta";
 import HomeSectionCard from "../HomeSectionCard/HomeSectionCard";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { findProductById } from "../../../State/Product/Action";
 const product = {
   name: "Basic Tee 6-Pack",
   price: "$192",
@@ -63,13 +63,22 @@ function classNames(...classes) {
 }
 
 export default function ProductDetails() {
-  const [selectedColor, setSelectedColor] = useState(product.colors[0]);
-  const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
+  const [selectedSize, setSelectedSize] = useState("");
+  const navigate = useNavigate();
+  const params = useParams();
+  const dispatch = useDispatch();
+  const { customersProduct } = useSelector((store) => store);
 
-  const navigate=useNavigate();
-  const handleAddToCart=()=>{
-navigate("/cart")
-  }
+  console.log("params", params);
+
+  const handleAddToCart = () => {
+    navigate("/cart");
+  };
+
+  useEffect(() => {
+    const data = { productId: params.productId };
+    dispatch(findProductById(data));
+  }, [params.productId]);
 
   return (
     <div className="bg-white lg:px-20">
@@ -118,8 +127,8 @@ navigate("/cart")
           <div className="flex flex-col items-center">
             <div className="overflow-hidden rounded-lg max-w-[30rem] max-h-[35rem]">
               <img
+                src={customersProduct.product?.imageUrl}
                 alt={product.images[0].alt}
-                src={product.images[0].src}
                 className="h-full w-full object-cover object-center"
               />
             </div>
@@ -139,21 +148,27 @@ navigate("/cart")
           <div className="lg:col-span-1 maxt-auto max-w-2xl px-4 pb-16 sm:px-6 lg:max-w-7xl lg:px-8 lg:pb-24">
             <div className="lg:col-span-2 ">
               <h1 className="text-lg lg:text-xl font-semibold text-gray-900">
-                Universaloutfit
+                {customersProduct.product?.brand}
               </h1>
               <h1 className="text-lg lg:text-xl text-gray-900 opacity-60 pt-1">
-                casual puff sleeves solid women white top
+                {customersProduct.product?.title}
               </h1>
             </div>
 
             {/* Options */}
             <div className="mt-4 lg:row-span-3 lg:mt-0">
               <h2 className="sr-only">Product information</h2>
-              
+
               <div className="flex space-x-5 items-center text-lg lg:text-xl text-gray-900 mt-6">
-                <p className="font-semibold">₹199</p>
-                <p className="opacity-50 line-through">₹211</p>
-                <p className="text-green-600 font-semibold">5% Off</p>
+                <p className="font-semibold">
+                  ₹{customersProduct.product?.discountedPrice}
+                </p>
+                <p className="opacity-50 line-through">
+                  ₹{customersProduct.product?.price}
+                </p>
+                <p className="text-green-600 font-semibold">
+                  {customersProduct.product?.discountPercent}% off
+                </p>
               </div>
 
               {/* Reviews */}
@@ -226,7 +241,8 @@ navigate("/cart")
                   </fieldset>
                 </div>
 
-                <Button onClick={handleAddToCart}
+                <Button
+                  onClick={handleAddToCart}
                   variant="contained"
                   sx={{ px: "2rem", py: "1rem", bgcolor: "#9155fd" }}
                 >
