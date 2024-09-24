@@ -34,7 +34,6 @@ function classNames(...classes) {
 export default function Product() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [selectedSortOption, setSelectedSortOption] = useState(sortOptions[0]);
-  const [filterOptions, setFilterOptions] = useState({});
   const [radioFilter, setRadioFilter] = useState(null);
 
   const location = useLocation();
@@ -44,6 +43,7 @@ export default function Product() {
   const dispatch = useDispatch();
   const { product } = useSelector((store) => store);
 
+  // Decoding query string and extracting filters
   const decodedQueryString = decodeURIComponent(location.search);
   const searchParams = new URLSearchParams(decodedQueryString);
   const colorValue = searchParams.get("color");
@@ -51,9 +51,10 @@ export default function Product() {
   const priceValue = searchParams.get("price");
   const discount = searchParams.get("discount");
   const sortValue = searchParams.get("sort");
-  const pageNumber = searchParams.get("page") || 1;
+  const pageNumber = parseInt(searchParams.get("page"), 10) || 1;
   const stock = searchParams.get("stock");
 
+  // Pagination handler
   const handlePaginationChange = (event, value) => {
     const searchParams = new URLSearchParams(location.search);
     searchParams.set("page", value);
@@ -62,17 +63,15 @@ export default function Product() {
     navigate({ search: `?${query}` });
   };
 
+  // Sort handler
   const handleSortChange = (option) => {
     setSelectedSortOption(option);
-    const sortedProducts = [...mens_kurta];
-
-    if (option.name === "Price: Low to High") {
-      sortedProducts.sort((a, b) => a.price - b.price);
-    } else if (option.name === "Price: High to Low") {
-      sortedProducts.sort((a, b) => b.price - a.price);
-    }
+    const searchParams = new URLSearchParams(location.search);
+    searchParams.set("sort", option.name === "Price: Low to High" ? "price_low" : "price_high");
+    navigate({ search: `?${searchParams.toString()}` });
   };
 
+  // Filter handler for checkboxes
   const handleFilter = (value, sectionId) => {
     const searchParams = new URLSearchParams(location.search);
     let filterValue = searchParams.get(sectionId) || "";
@@ -94,12 +93,13 @@ export default function Product() {
     navigate({ search: `?${query}` });
   };
 
+  // Filter handler for radio buttons
   const handleRadioFilterChange = (e, sectionId) => {
     setRadioFilter({ [sectionId]: e.target.value });
-
     const searchParams = new URLSearchParams(location.search);
     searchParams.set(sectionId, e.target.value);
-    navigate({ search: `?${searchParams.toString()}` });
+    const query = searchParams.toString();
+    navigate({ search: `?${query}` });
   };
 
   useEffect(() => {
@@ -129,6 +129,8 @@ export default function Product() {
     stock,
   ]);
 
+
+  
   return (
     <div className="bg-white">
       <div>
