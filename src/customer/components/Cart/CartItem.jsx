@@ -9,13 +9,27 @@ import { useDispatch } from "react-redux";
 const CartItem = ({item}) => {
   const dispatch=useDispatch();
 
-  const handleUpdatecartItem=(num)=>{
-    const data={data:{quantity:item.quantity+num},cartItemId:item?.id}
-    dispatch(updateCartItem(data))
+  const handleUpdatecartItem=(quantityChange)=>{
+    if (item._id) {
+      const data = {
+        data: { quantity: item.quantity + quantityChange },
+        cartItemId: item._id, 
+      };
+    dispatch(updateCartItem(data));
+  } else {
+    console.error("Missing cart item ID for update");
   }
-  const handleRemoveCartItem=(()=>{
-    dispatch(removeCartItem(item.id))
-  })
+
+  }
+  const handleRemoveCartItem=()=>{
+    if (item._id) {
+      dispatch(removeCartItem(item._id));  
+    } else {
+      console.error("Missing cart item ID for removal");
+    }
+  };
+  
+
   return (
     <div className="p-5 shadow-lg border rounded-md">
       <div className="flex items-center">

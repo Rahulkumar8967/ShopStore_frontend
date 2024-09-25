@@ -1,4 +1,3 @@
-import { updateCartItem } from "./Action";
 import {
             ADD_ITEM_TO_CART_FAILURE,
             ADD_ITEM_TO_CART_REQUEST,
@@ -59,6 +58,7 @@ import {
                   loading: true,
                   error:null
                 };
+                
               case REMOVE_CART_ITEM_SUCCESS:
                 return {
                   ...state,
