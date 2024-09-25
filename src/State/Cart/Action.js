@@ -14,12 +14,16 @@ import {
   UPDATE_CART_ITEM_SUCCESS,
 } from "./ActionType";
 
-export const get = () => async (dispatch) => {
+export const getCart = () => async (dispatch) => {
   dispatch({ type: GET_CART_REQUEST });
+
 
   try {
     const { data } = await api.get(`/api/cart/`);
-    dispatch({ type: GET_CART_SUCCESS, payload: data });
+    dispatch({ type: GET_CART_SUCCESS, payload:
+       data });
+       console.log("cart",data);
+
   } catch (error) {
     const errorMessage = error.response ? error.response.data.message : "An error occurred while fetching the cart";
     dispatch({ type: GET_CART_FAILURE, payload: errorMessage });
@@ -30,20 +34,22 @@ export const addItemToCart = (reqData) => async (dispatch) => {
   dispatch({ type: ADD_ITEM_TO_CART_REQUEST });
 
   try {
-    const { data } = await api.put("/api/cart/add", reqData.data);
+    const { data } = await api.put("/api/cart/add", reqData);
     dispatch({ type: ADD_ITEM_TO_CART_SUCCESS, payload: data });
+    console.log("add item to cart",data);
+    
   } catch (error) {
     const errorMessage = error.response ? error.response.data.message : "An error occurred while adding the item to the cart";
     dispatch({ type: ADD_ITEM_TO_CART_FAILURE, payload: errorMessage });
   }
 };
 
-export const removeCartItem = (reqData) => async (dispatch) => {
+export const removeCartItem = (cartItemId) => async (dispatch) => {
   dispatch({ type: REMOVE_CART_ITEM_REQUEST });
 
   try {
-    const { data } = await api.delete(`/api/cart_items/${reqData.cartItemId}`);
-    dispatch({ type: REMOVE_CART_ITEM_SUCCESS, payload: data });
+    const { data } = await api.delete(`/api/cart_items/${cartItemId}`);
+    dispatch({ type: REMOVE_CART_ITEM_SUCCESS, payload: cartItemId });
   } catch (error) {
     const errorMessage = error.response ? error.response.data.message : "An error occurred while removing the item from the cart";
     dispatch({ type: REMOVE_CART_ITEM_FAILURE, payload: errorMessage });

@@ -8,6 +8,7 @@ import HomeSectionCard from "../HomeSectionCard/HomeSectionCard";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { findProductById } from "../../../State/Product/Action";
+import { addItemToCart } from "../../../State/Cart/Action";
 const product = {
   name: "Basic Tee 6-Pack",
   price: "$192",
@@ -69,9 +70,13 @@ export default function ProductDetails() {
   const dispatch = useDispatch();
   const { customersProduct } = useSelector((store) => store);
 
-  console.log("params", params);
+  console.log("--->", params);
 
   const handleAddToCart = () => {
+    const data={productId:params.productId,size:selectedSize.name}
+    console.log("data _", data);
+    
+    dispatch(addItemToCart(data));
     navigate("/cart");
   };
 
