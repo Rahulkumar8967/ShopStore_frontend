@@ -71,8 +71,9 @@ export default function ProductDetails() {
   const { customersProduct } = useSelector((store) => store);
 
   console.log("--->", params);
-
+  
   const handleAddToCart = () => {
+    console.log("--->", params);
     const data={productId:params.productId,size:selectedSize.name}
     console.log("data _", data);
     

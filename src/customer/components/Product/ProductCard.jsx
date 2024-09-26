@@ -7,7 +7,6 @@ const ProductCard = ({ product }) => {
 
   return (
     <div
-      // later change product.id == product._id
       onClick={() => navigate(`/product/${product._id}`)}
       className="ProductCard w-[15rem] m-2 transition-all cursor-pointer"
     >
