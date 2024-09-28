@@ -14,18 +14,21 @@ const DeliveryAddressForm = () => {
     const data = new FormData(e.currentTarget);
 
     const address = {
-      firstname: data.get("firstName"),
-      lastname: data.get("lastName"),
+      firstName: data.get("firstName"), 
+      lastName: data.get("lastName"),   
       streetAddress: data.get("address"),
       city: data.get("city"),
       state: data.get("state"),
       zipCode: data.get("zip"),
       mobile: data.get("phone"), 
     };
+    console.log("Address Object Before Dispatch:", address);
+    
     const orderData={address,navigate}
-dispatch(createOrder(orderData));
-    console.log("Address", address, data); 
+   dispatch(createOrder(orderData));
+    console.log("Address", orderData); 
   };
+
 
 
 
@@ -41,13 +44,7 @@ dispatch(createOrder(orderData));
           <div className="p-5 py-7 border-b cursor-pointer">
             <AddressCard />
 
-            <Button
-              sx={{ mt: 2, bgcolor: "rgb(145, 85, 253)" }}
-              size="large"
-              variant="contained"
-            >
-              Deliver Here
-            </Button>
+           
           </div>
         </Grid>
         <Grid item xs={12} lg={7}>
