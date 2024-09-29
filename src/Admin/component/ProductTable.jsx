@@ -14,17 +14,19 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { findProducts } from "../../State/Product/Action";
+import { deleteProduct, findProducts } from "../../State/Product/Action";
 
 const ProductTable = () => {
   const dispatch = useDispatch();
   const { customersProduct } = useSelector((store) => store);
 
-  // State to manage pagination
+ 
   const [pageNumber, setPageNumber] = useState(1);
-  const pageSize = 10; // You can change this based on your requirements
+  const pageSize = 10;
 
-  // Fetch products when the component mounts or pageNumber changes
+  const handleProductDelete=(productId)=>{
+    dispatch(deleteProduct(productId))
+  }
   useEffect(() => {
     const data = {
       category: "",
@@ -39,7 +41,7 @@ const ProductTable = () => {
       stock: "",
     };
     dispatch(findProducts(data));
-  }, [dispatch, pageNumber]);
+  }, [dispatch, pageNumber,customersProduct.deletedProduct]);
 
   // Handle next page
   const handleNextPage = () => {
@@ -93,7 +95,9 @@ const ProductTable = () => {
                   <TableCell align="right">{item.price}</TableCell>
                   <TableCell align="right">{item.quantity}</TableCell>
                   <TableCell align="right">
-                    <Button variant="outlined">Delete</Button>
+
+                    <Button onClick={()=>handleProductDelete(item._id)}  variant="outlined">Delete</Button>
+
                   </TableCell>
                 </TableRow>
               ))}
