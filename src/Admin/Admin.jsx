@@ -102,9 +102,11 @@ const Admin = () => {
 
         <Box
           sx={{
-            padding: "8px", // Padding for spacing
-            border: "1px solid #333", // Apply a border for visual separation
-            borderRadius: "8px", // Rounded corners
+          ml:"73px",
+            padding: "15px", 
+            
+            // border: "1px solid #333", // Apply a border for visual separation
+            // borderRadius: "8px", // Rounded corners
             backgroundColor: "#f5f5f5", // Light background for content
             minHeight: "100vh", // Ensure it takes full height
             width: "100%", // Full width for responsive layout
