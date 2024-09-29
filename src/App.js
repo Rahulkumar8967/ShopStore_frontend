@@ -11,12 +11,14 @@ import OrderDetails from './customer/components/Order/OrderDetails';
 import Product from './customer/components/Product/Product';
 import ProductDetails from './customer/components/ProductDetails/ProductDetails';
 import CustomerRouters from './Routers/CustomerRouters';
+import AdminRouter from './Routers/AdminRouter';
 
 function App() {
   return (
     <div>
 <Routes>
   <Route path='/*' element={<CustomerRouters/>}></Route>
+  <Route path='/admin/*' element={<AdminRouter/>}></Route>
 
 </Routes>
   
